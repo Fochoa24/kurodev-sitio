@@ -18,11 +18,17 @@ export interface Proyecto {
   solucion: string[];
   portada: Captura;
   capturas: Captura[];
+  /** Capturas de página completa que se desplazan solas en la vitrina del inicio. */
+  vitrina?: { escritorio: string; movil: string };
 }
 
 export const proyectos: Proyecto[] = [
   {
     slug: 'cafe-cahve',
+    vitrina: {
+      escritorio: '/vitrina/cafe-cahve-largo-escritorio.webp',
+      movil: '/vitrina/cafe-cahve-largo-movil.webp',
+    },
     nombre: 'Café Cahve',
     rubro: 'Cafetería de especialidad',
     estado: 'demo',
@@ -50,6 +56,10 @@ export const proyectos: Proyecto[] = [
   },
   {
     slug: 'piu-pizza',
+    vitrina: {
+      escritorio: '/vitrina/piu-pizza-largo-escritorio.webp',
+      movil: '/vitrina/piu-pizza-largo-movil.webp',
+    },
     nombre: 'Più Pizza & Dolce',
     rubro: 'Pizzería y pastelería',
     estado: 'demo',
