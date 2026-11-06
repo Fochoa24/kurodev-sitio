@@ -16,6 +16,13 @@ describe('render (SSR)', () => {
     expect(head).toContain('og:title');
   });
 
+  test('inicio renderizado no muestra NaN, undefined ni null en precios', () => {
+    const { html } = render('/');
+    expect(html).not.toMatch(/NaN|undefined|null/);
+    expect(html).toMatch(/Fundador: (<!-- -->)?\$99\.990/);
+    expect(html).toContain('Cotización');
+  });
+
   test('inicio incluye JSON-LD ProfessionalService sin comuna', () => {
     const { html, head } = render('/');
     expect(html).toContain('online');

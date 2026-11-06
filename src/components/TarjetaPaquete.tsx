@@ -15,7 +15,7 @@ export function TarjetaPaquete({ paquete }: { paquete: Paquete }) {
       <p className="tarjeta-paquete__para">{paquete.paraQuien}</p>
       <div>
         <p className="tarjeta-paquete__precio">{textoPrecio(paquete)}</p>
-        {paquete.precioFundador !== undefined && (
+        {paquete.precioFundador != null && (
           <p className="tarjeta-paquete__fundador">
             Fundador: {formatearPrecio(paquete.precioFundador)}
           </p>
