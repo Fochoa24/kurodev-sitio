@@ -48,4 +48,31 @@ export const proyectos: Proyecto[] = [
       { src: '/capturas/cafe-cahve-carta.webp', alt: 'Carta de mesa de Café Cahve abierta desde el QR' },
     ],
   },
+  {
+    slug: 'piu-pizza',
+    nombre: 'Più Pizza & Dolce',
+    rubro: 'Pizzería y pastelería',
+    estado: 'demo',
+    paquete: 'Carta Digital',
+    url: 'https://demo-piu-pizza-kurodev.vercel.app',
+    resumen: 'Sitio con dos mundos, pizza y pastelería, y pedidos directos por WhatsApp sin apps de delivery.',
+    problema:
+      'El local vende sobre todo por Rappi y Uber Eats, que se quedan con una comisión de cada pedido. Además tiene dos oficios bajo un mismo techo, la pizza y la pastelería, y quienes lo conocían por su nombre anterior no siempre lo encuentran.',
+    solucion: [
+      'Diseño que cambia de piel: noche de horno para la pizza y día de vitrina para lo dulce.',
+      'Carta con un dibujo de cada pizza armado a partir de sus ingredientes reales, con filtros.',
+      'Carrito que arma el pedido y lo envía directo por WhatsApp, sin comisión de apps.',
+      'Venta cruzada: al agregar una pizza, el sitio sugiere acompañamientos y postres.',
+      'Su nombre anterior incluido en el texto y en el SEO, para no perder a quien lo busca así.',
+    ],
+    portada: {
+      src: '/capturas/piu-pizza-carta.webp',
+      alt: 'Carta de pizzas del sitio demo de Più Pizza & Dolce',
+    },
+    capturas: [
+      { src: '/capturas/piu-pizza-carta.webp', alt: 'Carta de pizzas de Più en escritorio, con filtros por tipo' },
+      { src: '/capturas/piu-pizza-dolce.webp', alt: 'Sección Dolce de Più, con la pastelería de la casa' },
+      { src: '/capturas/piu-pizza-movil.webp', alt: 'Carta de pizzas de Più en celular' },
+    ],
+  },
 ];
