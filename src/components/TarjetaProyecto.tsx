@@ -1,17 +1,21 @@
+import type { PointerEvent } from 'react';
 import { Link } from 'react-router-dom';
 import type { Proyecto } from '../data/proyectos';
 
+// Brillo lima que sigue al cursor dentro de la tarjeta.
+function seguir(e: PointerEvent<HTMLElement>) {
+  const r = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`);
+  e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`);
+}
+
 export function TarjetaProyecto({ proyecto }: { proyecto: Proyecto }) {
+  // Con captura larga, al pasar el mouse la página se recorre sola.
+  const larga = proyecto.vitrina?.escritorio;
   return (
-    <article className="tarjeta-proyecto">
-      <div className="tarjeta-proyecto__imagen">
-        <img
-          src={proyecto.portada.src}
-          alt={proyecto.portada.alt}
-          loading="lazy"
-          width={1440}
-          height={900}
-        />
+    <article className="tarjeta-proyecto" onPointerMove={seguir}>
+      <div className={`tarjeta-proyecto__imagen${larga ? ' tarjeta-proyecto__imagen--larga' : ''}`}>
+        <img src={larga ?? proyecto.portada.src} alt={proyecto.portada.alt} loading="lazy" />
       </div>
       <div className="tarjeta-proyecto__cuerpo">
         <div className="tarjeta-proyecto__meta">

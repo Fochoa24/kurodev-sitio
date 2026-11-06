@@ -1308,3 +1308,118 @@ p {
     position: relative;
   }
 }
+
+/* Cinta en movimiento */
+.cinta {
+  overflow: hidden;
+  background: var(--lima);
+  color: var(--kuro);
+  transform: rotate(-1.6deg);
+  margin: 8px -20px 0;
+  padding: 14px 0;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 60px -10px rgba(184, 242, 58, 0.45);
+}
+.cinta__pista {
+  display: flex;
+  width: max-content;
+  animation: cinta-corre 38s linear infinite;
+}
+.cinta:hover .cinta__pista {
+  animation-play-state: paused;
+}
+.cinta__fila {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cinta__fila li {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding-right: 28px;
+  font-family: var(--f-titulo);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+.cinta__fila li::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--kuro);
+}
+@keyframes cinta-corre {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Tarjetas de proyecto: brillo que sigue al cursor y captura que se recorre */
+.tarjeta-proyecto {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid transparent;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.tarjeta-proyecto::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(184, 242, 58, 0.14), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.tarjeta-proyecto:hover {
+  border-color: rgba(184, 242, 58, 0.35);
+  box-shadow: 0 30px 60px -30px rgba(184, 242, 58, 0.25);
+}
+.tarjeta-proyecto:hover::before {
+  opacity: 1;
+}
+.tarjeta-proyecto__imagen img {
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.tarjeta-proyecto:hover .tarjeta-proyecto__imagen img {
+  transform: scale(1.03);
+}
+.tarjeta-proyecto__imagen--larga img {
+  object-position: 50% 0%;
+  transition:
+    object-position 9s ease-in-out,
+    transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.tarjeta-proyecto:hover .tarjeta-proyecto__imagen--larga img {
+  object-position: 50% 100%;
+  transition:
+    object-position 12s linear,
+    transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Aparición al hacer scroll (la clase la pone useRevelar) */
+.revela {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.3s,
+    box-shadow 0.3s;
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+.revela--visible {
+  opacity: 1;
+  transform: none;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
