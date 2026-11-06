@@ -5,6 +5,8 @@ import App from './App';
 import { SeoContext, headHtml, type DatosSeo } from './components/Seo';
 import { proyectos } from './data/proyectos';
 
+export { sitio } from './data/sitio';
+
 /** Rutas que el prerender genera como HTML estático. */
 export const rutas = ['/', ...proyectos.map((p) => `/proyectos/${p.slug}`)];
 

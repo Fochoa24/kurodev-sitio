@@ -164,6 +164,10 @@ p {
 .boton--borde:hover {
   border-color: var(--blanco);
 }
+.tarjeta-paquete .boton--borde,
+.tarjeta-proyecto .boton--borde {
+  border-color: #555550;
+}
 .boton--chico {
   min-height: 40px;
   padding: 8px 16px;
