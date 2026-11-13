@@ -63,6 +63,7 @@ describe('SSR en inglés', () => {
     expect(head).toContain('<link rel="canonical" href="https://kurodev-seven.vercel.app/en" />');
     expect(head).toContain('hreflang="es" href="https://kurodev-seven.vercel.app/"');
     expect(head).toContain('en_US');
+    expect(head).toContain('og-image-en.png');
   });
   test('caso en inglés', () => {
     const { html, head } = render('/en/proyectos/piu-pizza');

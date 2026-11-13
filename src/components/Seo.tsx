@@ -24,7 +24,7 @@ export function headHtml(d: DatosSeo): string {
   const url = sitio.url + enRuta(idioma, d.ruta);
   const es = sitio.url + d.ruta;
   const en = sitio.url + enRuta('en', d.ruta);
-  const img = sitio.url + sitio.ogImage;
+  const img = sitio.url + (idioma === 'en' ? sitio.ogImageEn : sitio.ogImage);
   const t = escapar(d.titulo);
   const desc = escapar(d.descripcion);
   return [

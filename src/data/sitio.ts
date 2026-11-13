@@ -3,4 +3,5 @@ export const sitio = {
   url: 'https://kurodev-seven.vercel.app',
   nombre: 'KuroDev',
   ogImage: '/og-image.png',
+  ogImageEn: '/og-image-en.png',
 };
