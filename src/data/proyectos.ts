@@ -85,6 +85,37 @@ export const proyectos: Proyecto[] = [
       { src: '/capturas/piu-pizza-movil.webp', alt: 'Carta de pizzas de Più en celular' },
     ],
   },
+  {
+    slug: 'clemont',
+    vitrina: {
+      escritorio: '/vitrina/clemont-largo-escritorio.webp',
+      movil: '/vitrina/clemont-largo-movil.webp',
+    },
+    nombre: 'Cafetería Clemont',
+    rubro: 'Cafetería',
+    estado: 'demo',
+    paquete: 'Carta Digital',
+    url: 'https://demo-clemont-kurodev.vercel.app',
+    resumen: 'Su carta impresa llevada a la web, con pedidos por WhatsApp y café en grano molido para tu cafetera.',
+    problema:
+      'Una cafetería recién abierta y sin página web. Su carta existía solo en papel, y la venta de café en grano molido al momento quedaba escondida al final de la hoja.',
+    solucion: [
+      'Diseño sacado de su propia carta: turquesa sobre papel crema, toldo a rayas y dibujos a tinta.',
+      'La taza de la portada se va vaciando a medida que bajas y crece al elegir tamaño Grande.',
+      'Selector Normal / Grande que cambia todos los precios de la carta.',
+      'Eliges tu cafetera y la bolsa de grano de 250 g se suma al pedido con la molienda indicada.',
+      'Pedido armado en el sitio que se envía directo por WhatsApp.',
+    ],
+    portada: {
+      src: '/capturas/clemont-inicio.webp',
+      alt: 'Portada del sitio demo de Cafetería Clemont',
+    },
+    capturas: [
+      { src: '/capturas/clemont-inicio.webp', alt: 'Portada de Clemont en escritorio, con la taza dibujada' },
+      { src: '/capturas/clemont-carta.webp', alt: 'Carta de Clemont por categorías, con precios Normal y Grande' },
+      { src: '/capturas/clemont-movil.webp', alt: 'Portada de Clemont en celular' },
+    ],
+  },
 ];
 
 // Inglés, en el mismo orden que `proyectos`. Solo hechos que ya están arriba.
@@ -127,6 +158,26 @@ export const proyectosEn: Partial<Proyecto>[] = [
       { src: '/capturas/piu-pizza-carta.webp', alt: 'Più pizza menu on desktop, with filters by type' },
       { src: '/capturas/piu-pizza-dolce.webp', alt: 'Più’s Dolce section, with the house pastries' },
       { src: '/capturas/piu-pizza-movil.webp', alt: 'Più pizza menu on a phone' },
+    ],
+  },
+  {
+    rubro: 'Coffee shop',
+    paquete: 'Digital Menu',
+    resumen: 'Its printed menu brought to the web, with WhatsApp orders and coffee beans ground for your coffee maker.',
+    problema:
+      'A newly opened coffee shop with no website. Its menu existed only on paper, and its freshly ground coffee beans were hidden at the bottom of the page.',
+    solucion: [
+      'A design taken from its own menu: turquoise on cream paper, a striped awning and ink drawings.',
+      'The cup on the home page empties as you scroll and grows when you pick the Large size.',
+      'A Regular / Large switch that changes every price on the menu.',
+      'You pick your coffee maker and a 250 g bag of beans is added to the order with the right grind.',
+      'An order built on the site and sent straight to WhatsApp.',
+    ],
+    portada: { src: '/capturas/clemont-inicio.webp', alt: 'Home page of the Cafetería Clemont demo site' },
+    capturas: [
+      { src: '/capturas/clemont-inicio.webp', alt: 'Clemont home page on desktop, with the drawn cup' },
+      { src: '/capturas/clemont-carta.webp', alt: 'Clemont menu by category, with Regular and Large prices' },
+      { src: '/capturas/clemont-movil.webp', alt: 'Clemont home page on a phone' },
     ],
   },
 ];
