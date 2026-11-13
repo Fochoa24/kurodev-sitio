@@ -1,24 +1,26 @@
 import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { proyectos } from '../data/proyectos';
+import { proyectos, proyectosEn } from '../data/proyectos';
+import { traducir, useIdioma } from '../lib/idioma';
 
 // Navegador + celular con las demos reales desplazándose solas.
 // Las capturas vienen de `vitrina` en data/proyectos.ts.
 
 const CADA = 7000;
-const conVitrina = proyectos.filter((p) => p.vitrina);
 
 export function Vitrina() {
   const [activo, setActivo] = useState(0);
   const [pausa, setPausa] = useState(false);
   const caja = useRef<HTMLDivElement>(null);
+  const { idioma, t, r } = useIdioma();
+  const conVitrina = traducir(proyectos, idioma, proyectosEn).filter((p) => p.vitrina);
 
   useEffect(() => {
     if (conVitrina.length < 2 || pausa) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const id = window.setInterval(() => setActivo((i) => (i + 1) % conVitrina.length), CADA);
     return () => window.clearInterval(id);
-  }, [pausa]);
+  }, [pausa, conVitrina.length]);
 
   if (conVitrina.length === 0) return null;
   const actual = conVitrina[activo];
@@ -47,9 +49,9 @@ export function Vitrina() {
         onPointerLeave={soltar}
       >
         <Link
-          to={`/proyectos/${actual.slug}`}
+          to={r(`/proyectos/${actual.slug}`)}
           className="vitrina__navegador"
-          aria-label={`Ver el caso ${actual.nombre}`}
+          aria-label={t.vitrina.verCaso(actual.nombre)}
         >
           <span className="vitrina__barra" aria-hidden="true">
             <i />
@@ -62,7 +64,7 @@ export function Vitrina() {
               <img
                 key={p.slug}
                 src={p.vitrina!.escritorio}
-                alt={i === activo ? `Sitio de ${p.nombre} en escritorio` : ''}
+                alt={i === activo ? t.vitrina.alt(p.nombre) : ''}
                 className={i === activo ? 'activa' : ''}
                 decoding="async"
               />
@@ -70,7 +72,7 @@ export function Vitrina() {
           </span>
         </Link>
         <Link
-          to={`/proyectos/${actual.slug}`}
+          to={r(`/proyectos/${actual.slug}`)}
           className="vitrina__celular"
           tabIndex={-1}
           aria-hidden="true"
@@ -93,15 +95,15 @@ export function Vitrina() {
       <div className="vitrina__pie">
         <p aria-live="polite">
           <strong>{actual.nombre}</strong> · {actual.rubro}
-          {actual.estado === 'demo' && <span className="vitrina__demo">Demo</span>}
+          {actual.estado === 'demo' && <span className="vitrina__demo">{t.proyectos.demo}</span>}
         </p>
         {conVitrina.length > 1 && (
-          <div className="vitrina__puntos" role="group" aria-label="Elegir proyecto">
+          <div className="vitrina__puntos" role="group" aria-label={t.vitrina.elegir}>
             {conVitrina.map((p, i) => (
               <button
                 key={p.slug}
                 type="button"
-                aria-label={`Mostrar ${p.nombre}`}
+                aria-label={t.vitrina.mostrar(p.nombre)}
                 aria-pressed={i === activo}
                 onClick={() => setActivo(i)}
               />

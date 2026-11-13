@@ -1,16 +1,21 @@
-import { diferenciadores, proceso } from '../data/proceso';
+import { diferenciadores, diferenciadoresEn, proceso, procesoEn } from '../data/proceso';
+import { useIdioma } from '../lib/idioma';
 
 export function Proceso() {
+  const { idioma, t: tt } = useIdioma();
+  const t = tt.proceso;
+  const pasos = idioma === 'en' ? procesoEn : proceso;
+  const difs = idioma === 'en' ? diferenciadoresEn : diferenciadores;
   return (
     <section className="seccion" id="como-trabajo" aria-labelledby="titulo-proceso">
       <div className="contenedor">
         <div className="seccion__cabecera">
-          <span className="etiqueta">Cómo trabajo</span>
-          <h2 id="titulo-proceso">De la conversación a tu sitio online</h2>
-          <p>Un proceso simple, sin letra chica, para que sepas qué pasa en cada paso.</p>
+          <span className="etiqueta">{t.etiqueta}</span>
+          <h2 id="titulo-proceso">{t.titulo}</h2>
+          <p>{t.bajada}</p>
         </div>
         <ol className="proceso__lista">
-          {proceso.map((paso) => (
+          {pasos.map((paso) => (
             <li className="proceso__paso" key={paso.titulo}>
               <h3>{paso.titulo}</h3>
               <p>{paso.detalle}</p>
@@ -18,7 +23,7 @@ export function Proceso() {
           ))}
         </ol>
         <div className="diferenciadores">
-          {diferenciadores.map((d) => (
+          {difs.map((d) => (
             <div className="diferenciador" key={d.titulo}>
               <h3>{d.titulo}</h3>
               <p>{d.detalle}</p>

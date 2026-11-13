@@ -86,3 +86,47 @@ export const proyectos: Proyecto[] = [
     ],
   },
 ];
+
+// Inglés, en el mismo orden que `proyectos`. Solo hechos que ya están arriba.
+export const proyectosEn: Partial<Proyecto>[] = [
+  {
+    rubro: 'Specialty coffee shop',
+    paquete: 'Digital Menu',
+    resumen: 'Website with a digital menu, QR codes for the tables and orders that arrive via WhatsApp.',
+    problema:
+      'The café was only on Instagram and its OlaClick store. It had no site of its own to show the place, the full menu and its hours, and no menu to scan at the table.',
+    solucion: [
+      'Full website: home, about, menu, the space and how to get there.',
+      'Table menu opened by the QR code, with the table number included.',
+      'Order cart that builds the message and sends it via WhatsApp.',
+      '“Open” or “closed” notice based on the café’s real opening hours.',
+      'Its OlaClick store built in, for those who prefer to pay online.',
+    ],
+    portada: { src: '/capturas/cafe-cahve-escritorio.webp', alt: 'Home page of the Café Cahve demo site' },
+    capturas: [
+      { src: '/capturas/cafe-cahve-escritorio.webp', alt: 'Café Cahve home page on desktop' },
+      { src: '/capturas/cafe-cahve-movil.webp', alt: 'Café Cahve home page on a phone' },
+      { src: '/capturas/cafe-cahve-carta.webp', alt: 'Café Cahve table menu opened from the QR code' },
+    ],
+  },
+  {
+    rubro: 'Pizzeria and pastry shop',
+    paquete: 'Digital Menu',
+    resumen: 'A site with two worlds, pizza and pastry, and direct WhatsApp orders without delivery apps.',
+    problema:
+      'The shop sells mostly through Rappi and Uber Eats, which take a commission on every order. It also runs two crafts under one roof, pizza and pastry, and people who knew it by its former name don’t always find it.',
+    solucion: [
+      'A design that changes skin: oven night for the pizza and display-case daylight for the sweets.',
+      'A menu with a drawing of each pizza built from its real ingredients, with filters.',
+      'A cart that builds the order and sends it straight to WhatsApp, with no app commission.',
+      'Cross-selling: when you add a pizza, the site suggests sides and desserts.',
+      'Its former name included in the copy and the SEO, so people searching for it aren’t lost.',
+    ],
+    portada: { src: '/capturas/piu-pizza-carta.webp', alt: 'Pizza menu of the Più Pizza & Dolce demo site' },
+    capturas: [
+      { src: '/capturas/piu-pizza-carta.webp', alt: 'Più pizza menu on desktop, with filters by type' },
+      { src: '/capturas/piu-pizza-dolce.webp', alt: 'Più’s Dolce section, with the house pastries' },
+      { src: '/capturas/piu-pizza-movil.webp', alt: 'Più pizza menu on a phone' },
+    ],
+  },
+];

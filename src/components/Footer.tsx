@@ -1,17 +1,19 @@
 import { Link } from 'react-router-dom';
 import { contacto } from '../data/contacto';
+import { useIdioma } from '../lib/idioma';
 import { Logo } from './Logo';
 
 export function Footer() {
+  const { t, r } = useIdioma();
   return (
     <footer className="footer">
       <div className="contenedor footer__fila">
-        <Link to="/" className="footer__logo" aria-label="KuroDev, ir al inicio">
+        <Link to={r('/')} className="footer__logo" aria-label={t.header.irInicio}>
           <Logo />
         </Link>
-        <nav aria-label="Pie de página">
-          <a href="/#proyectos">Proyectos</a>
-          <a href="/#servicios">Servicios</a>
+        <nav aria-label={t.footer.nav}>
+          <a href={r('/#proyectos')}>{t.header.enlaces[0]}</a>
+          <a href={r('/#servicios')}>{t.header.enlaces[1]}</a>
           <a href={contacto.instagram} target="_blank" rel="noopener">
             Instagram
           </a>

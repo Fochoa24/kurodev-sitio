@@ -1,13 +1,14 @@
 import { useEffect, useRef } from 'react';
 import { contacto } from '../data/contacto';
 import { linkWhatsApp } from '../lib/whatsapp';
+import { useIdioma } from '../lib/idioma';
 import { IconoWhatsApp } from './IconoWhatsApp';
-
-const RESPUESTA =
-  '¡Hola! Cuéntame qué tipo de negocio tienes y te preparo un borrador para que veas cómo quedaría 🙌';
 
 export function Contacto() {
   const chat = useRef<HTMLDivElement>(null);
+  const { t: tt } = useIdioma();
+  const t = tt.contacto;
+  const wa = linkWhatsApp(tt.mensajeDefault);
 
   // La conversación se "escribe" al llegar a la sección. Sin JS o con
   // "reducir movimiento", el chat se ve completo desde el inicio.
@@ -33,17 +34,15 @@ export function Contacto() {
       <div className="contenedor">
         <div className="contacto">
           <div className="contacto__texto">
-            <span className="etiqueta">Contacto</span>
+            <span className="etiqueta">{t.etiqueta}</span>
             <h2 id="titulo-contacto">
-              ¿Conversamos<span className="lima">?</span>
+              {t.titulo}
+              <span className="lima">?</span>
             </h2>
-            <p>
-              Cuéntame de tu negocio. Te respondo por WhatsApp y, si te sirve, te preparo un borrador
-              de tu página antes de cobrarte nada.
-            </p>
+            <p>{t.texto}</p>
             <ul className="contacto__canales">
               <li>
-                <a href={linkWhatsApp()} target="_blank" rel="noopener">
+                <a href={wa} target="_blank" rel="noopener">
                   <span>WhatsApp</span> {contacto.whatsappTexto} <i aria-hidden="true">↗</i>
                 </a>
               </li>
@@ -54,7 +53,7 @@ export function Contacto() {
               </li>
               <li>
                 <a href={`mailto:${contacto.correo}`}>
-                  <span>Correo</span> {contacto.correo} <i aria-hidden="true">↗</i>
+                  <span>{t.correo}</span> {contacto.correo} <i aria-hidden="true">↗</i>
                 </a>
               </li>
             </ul>
@@ -67,12 +66,12 @@ export function Contacto() {
               </span>
               <span>
                 <strong>KuroDev</strong>
-                <small>Páginas web para negocios</small>
+                <small>{t.chatSub}</small>
               </span>
             </div>
-            <div className="chat__mensajes" aria-label="Ejemplo de conversación por WhatsApp">
+            <div className="chat__mensajes" aria-label={t.chatLabel}>
               <p className="chat__burbuja chat__burbuja--yo">
-                {contacto.mensajeDefault}
+                {tt.mensajeDefault}
                 <small>✓✓</small>
               </p>
               <p className="chat__escribiendo" aria-hidden="true">
@@ -80,12 +79,12 @@ export function Contacto() {
                 <i />
                 <i />
               </p>
-              <p className="chat__burbuja chat__burbuja--kuro">{RESPUESTA}</p>
+              <p className="chat__burbuja chat__burbuja--kuro">{t.respuesta}</p>
             </div>
-            <a className="chat__enviar" href={linkWhatsApp()} target="_blank" rel="noopener">
-              <span className="chat__campo">{contacto.mensajeDefault}</span>
+            <a className="chat__enviar" href={wa} target="_blank" rel="noopener">
+              <span className="chat__campo">{tt.mensajeDefault}</span>
               <span className="chat__boton">
-                <IconoWhatsApp /> Enviar
+                <IconoWhatsApp /> {t.enviar}
               </span>
             </a>
           </div>

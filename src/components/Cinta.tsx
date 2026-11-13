@@ -1,17 +1,10 @@
-// Cinta lima en movimiento entre el hero y los proyectos.
-const ITEMS = [
-  'Páginas web',
-  'Cartas digitales con QR',
-  'Pedidos por WhatsApp',
-  'Reservas online',
-  'Pensado para el celular',
-  'Borrador antes de cobrar',
-];
+import { useIdioma } from '../lib/idioma';
 
-function Fila({ oculta = false }: { oculta?: boolean }) {
+// Cinta lima en movimiento entre el hero y los proyectos.
+function Fila({ items, oculta = false }: { items: string[]; oculta?: boolean }) {
   return (
     <ul className="cinta__fila" aria-hidden={oculta || undefined}>
-      {ITEMS.map((t) => (
+      {items.map((t) => (
         <li key={t}>{t}</li>
       ))}
     </ul>
@@ -19,11 +12,12 @@ function Fila({ oculta = false }: { oculta?: boolean }) {
 }
 
 export function Cinta() {
+  const { t } = useIdioma();
   return (
     <div className="cinta">
       <div className="cinta__pista">
-        <Fila />
-        <Fila oculta />
+        <Fila items={t.cinta} />
+        <Fila items={t.cinta} oculta />
       </div>
     </div>
   );

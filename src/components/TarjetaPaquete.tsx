@@ -1,23 +1,24 @@
 import { textoPrecio, type Paquete } from '../data/paquetes';
 import { formatearPrecio } from '../lib/precio';
 import { linkWhatsApp } from '../lib/whatsapp';
+import { useIdioma } from '../lib/idioma';
 
 export function TarjetaPaquete({ paquete }: { paquete: Paquete }) {
-  const mensaje =
-    paquete.precio === null
-      ? 'Hola, quiero cotizar una solución a medida para mi negocio'
-      : `Hola, me interesa el paquete ${paquete.nombre}`;
+  const { idioma, t: tt } = useIdioma();
+  const t = tt.servicios;
+  const mensaje = paquete.precio === null ? t.mensajeCotizar : t.mensajePaquete(paquete.nombre);
 
   return (
     <article className={`tarjeta-paquete${paquete.destacado ? ' tarjeta-paquete--destacado' : ''}`}>
-      {paquete.destacado && <span className="etiqueta">Más completo</span>}
+      {paquete.destacado && <span className="etiqueta">{t.destacado}</span>}
       <h3>{paquete.nombre}</h3>
       <p className="tarjeta-paquete__para">{paquete.paraQuien}</p>
       <div>
-        <p className="tarjeta-paquete__precio">{textoPrecio(paquete)}</p>
+        <p className="tarjeta-paquete__precio">{textoPrecio(paquete, idioma)}</p>
         {paquete.precioFundador != null && (
           <p className="tarjeta-paquete__fundador">
-            Fundador: {formatearPrecio(paquete.precioFundador)}
+            {t.precioFundador}
+            {formatearPrecio(paquete.precioFundador, idioma)}
           </p>
         )}
       </div>
@@ -26,14 +27,19 @@ export function TarjetaPaquete({ paquete }: { paquete: Paquete }) {
           <li key={i}>{i}</li>
         ))}
       </ul>
-      {paquete.plazo && <p className="tarjeta-paquete__plazo">Plazo: {paquete.plazo}</p>}
+      {paquete.plazo && (
+        <p className="tarjeta-paquete__plazo">
+          {t.plazo}
+          {paquete.plazo}
+        </p>
+      )}
       <a
         className={`boton boton--chico ${paquete.destacado ? 'boton--lima' : 'boton--borde'}`}
         href={linkWhatsApp(mensaje)}
         target="_blank"
         rel="noopener"
       >
-        {paquete.precio === null ? 'Cotizar' : 'Lo quiero'}
+        {paquete.precio === null ? t.cotizar : t.loQuiero}
       </a>
     </article>
   );

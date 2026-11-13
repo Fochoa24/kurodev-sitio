@@ -12,8 +12,10 @@ const { render, rutas, sitio } = await import(pathToFileURL(ssr).href);
 const plantilla = await readFile(join(dist, 'index.html'), 'utf8');
 
 function pagina(url) {
-  const { html, head } = render(url);
-  return plantilla.replace('<!--app-head-->', head).replace('<!--app-html-->', html);
+  const { html, head, lang } = render(url);
+  return plantilla
+    .replace('<html lang="es-CL">', `<html lang="${lang}">`)
+    .replace('<!--app-head-->', head).replace('<!--app-html-->', html);
 }
 
 for (const ruta of rutas) {

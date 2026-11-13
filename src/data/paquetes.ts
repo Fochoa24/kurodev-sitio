@@ -1,6 +1,7 @@
 // Paquetes y precios aprobados (estrategia/precios.md, nov. 2026).
 // No cambiar montos sin aprobación de Felipe.
 import { formatearPrecio } from '../lib/precio';
+import type { Idioma } from '../lib/idioma';
 
 export interface Paquete {
   id: string;
@@ -81,6 +82,58 @@ export const paquetes: Paquete[] = [
   },
 ];
 
-export function textoPrecio(p: Paquete): string {
+// Inglés, en el mismo orden que `paquetes`. Montos y plazos numéricos se toman de arriba.
+export const paquetesEn: Partial<Paquete>[] = [
+  {
+    nombre: 'Showcase',
+    paraQuien: 'Tattoo artists, hair salons, nail artists and entrepreneurs who only use Instagram today.',
+    incluye: [
+      'A single page focused on getting people to message you',
+      'Gallery of your work',
+      'Services and prices',
+      'Map, hours and WhatsApp button',
+      'Google Business Profile listing',
+    ],
+    plazo: '5–7 business days',
+  },
+  {
+    nombre: 'Showcase + Booking',
+    paraQuien: 'Beauty salons, hair salons and wellness centers that work by appointment.',
+    incluye: ['Everything in Showcase', 'Online appointment booking (built-in or with AgendaPro)'],
+  },
+  {
+    nombre: 'Digital Menu',
+    paraQuien: 'Cafés and restaurants.',
+    incluye: [
+      'A 4 to 5 page website',
+      'A menu you update yourself',
+      'QR codes for the tables, ready to print',
+      'Orders via WhatsApp',
+      'Local SEO to show up on Google',
+    ],
+    plazo: '10–15 business days',
+  },
+  {
+    nombre: 'Sales page',
+    paraQuien: 'One product, one promotion or one launch.',
+    incluye: [
+      'A page built to sell',
+      'Copy by section: problem, solution, benefits',
+      'Contact via WhatsApp, form or payment',
+    ],
+  },
+  {
+    nombre: 'Custom',
+    paraQuien: 'When you need a tool that solves something specific.',
+    incluye: [
+      'Advanced booking systems',
+      'Panels to edit your information',
+      'AI assistants when they truly add value',
+    ],
+  },
+];
+
+export function textoPrecio(p: Paquete, idioma: Idioma = 'es'): string {
+  if (idioma === 'en') return p.precio === null ? 'Custom quote' : `From ${formatearPrecio(p.precio, 'en')}`;
   return p.precio === null ? 'Cotización' : `Desde ${formatearPrecio(p.precio)}`;
 }

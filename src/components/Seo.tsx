@@ -1,10 +1,13 @@
 import { createContext, useContext, useEffect } from 'react';
 import { sitio } from '../data/sitio';
+import { enRuta, useIdioma, type Idioma } from '../lib/idioma';
 
 export interface DatosSeo {
   titulo: string;
   descripcion: string;
+  /** Ruta en español (sin /en); el idioma la completa. */
   ruta: string;
+  idioma?: Idioma;
   noindex?: boolean;
   jsonLd?: object;
 }
@@ -17,7 +20,10 @@ function escapar(s: string): string {
 }
 
 export function headHtml(d: DatosSeo): string {
-  const url = sitio.url + d.ruta;
+  const idioma = d.idioma ?? 'es';
+  const url = sitio.url + enRuta(idioma, d.ruta);
+  const es = sitio.url + d.ruta;
+  const en = sitio.url + enRuta('en', d.ruta);
   const img = sitio.url + sitio.ogImage;
   const t = escapar(d.titulo);
   const desc = escapar(d.descripcion);
@@ -25,8 +31,11 @@ export function headHtml(d: DatosSeo): string {
     `<title>${t}</title>`,
     `<meta name="description" content="${desc}" />`,
     d.noindex ? `<meta name="robots" content="noindex" />` : `<link rel="canonical" href="${url}" />`,
+    d.noindex ? '' : `<link rel="alternate" hreflang="es" href="${es}" />`,
+    d.noindex ? '' : `<link rel="alternate" hreflang="en" href="${en}" />`,
+    d.noindex ? '' : `<link rel="alternate" hreflang="x-default" href="${es}" />`,
     `<meta property="og:type" content="website" />`,
-    `<meta property="og:locale" content="es_CL" />`,
+    `<meta property="og:locale" content="${idioma === 'en' ? 'en_US' : 'es_CL'}" />`,
     `<meta property="og:site_name" content="${sitio.nombre}" />`,
     `<meta property="og:title" content="${t}" />`,
     `<meta property="og:description" content="${desc}" />`,
@@ -43,12 +52,14 @@ export function headHtml(d: DatosSeo): string {
 
 export function Seo(props: DatosSeo) {
   const ctx = useContext(SeoContext);
-  if (ctx) ctx.datos = props;
+  const { idioma } = useIdioma();
+  if (ctx) ctx.datos = { idioma, ...props };
 
   useEffect(() => {
     document.title = props.titulo;
+    document.documentElement.lang = idioma === 'en' ? 'en' : 'es-CL';
     document.querySelector('meta[name="description"]')?.setAttribute('content', props.descripcion);
-  }, [props.titulo, props.descripcion]);
+  }, [props.titulo, props.descripcion, idioma]);
 
   return null;
 }

@@ -1,34 +1,36 @@
-import { proyectos } from '../data/proyectos';
+import { proyectos, proyectosEn } from '../data/proyectos';
 import { linkWhatsApp } from '../lib/whatsapp';
+import { traducir, useIdioma } from '../lib/idioma';
 import { TarjetaProyecto } from './TarjetaProyecto';
 
 export function Proyectos() {
+  const { idioma, t: tt } = useIdioma();
+  const t = tt.proyectos;
   return (
     <section className="seccion" id="proyectos" aria-labelledby="titulo-proyectos">
       <div className="contenedor">
         <div className="seccion__cabecera">
-          <span className="etiqueta">Proyectos</span>
-          <h2 id="titulo-proyectos">Lo que he construido</h2>
+          <span className="etiqueta">{t.etiqueta}</span>
+          <h2 id="titulo-proyectos">{t.titulo}</h2>
           <p>
-            Sitios funcionando que puedes abrir y probar. Los marcados como <strong>Demo</strong> son
-            borradores que preparo para mostrarle a un negocio cómo se vería su página.
+            {t.antes} <strong>{t.demo}</strong> {t.despues}
           </p>
         </div>
         <div className="proyectos__grilla">
-          {proyectos.map((p) => (
+          {traducir(proyectos, idioma, proyectosEn).map((p) => (
             <TarjetaProyecto key={p.slug} proyecto={p} />
           ))}
           <div className="proyectos__proximo">
-            <span className="etiqueta">Próximo proyecto</span>
-            <h3>¿El tuyo?</h3>
-            <p>Te preparo un borrador de tu sitio para que veas cómo quedaría antes de decidir.</p>
+            <span className="etiqueta">{t.proximo}</span>
+            <h3>{t.tuyo}</h3>
+            <p>{t.tuyoTexto}</p>
             <a
               className="boton boton--borde boton--chico"
-              href={linkWhatsApp('Hola, quiero ver un borrador de la página para mi negocio')}
+              href={linkWhatsApp(t.tuyoMensaje)}
               target="_blank"
               rel="noopener"
             >
-              Pedir mi borrador
+              {t.tuyoBoton}
             </a>
           </div>
         </div>
